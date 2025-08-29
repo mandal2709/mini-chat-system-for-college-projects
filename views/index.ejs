@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Whatsaap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>All Chats</h2>
+    <form method="get" action="/chats/new">
+        <button>New Chat</button>
+    </form>
+    <br>
+    <% for (let chat of chats){ %>
+        <div class="chat">
+            <p>from: <i><b>
+                        <%= chat.from %>
+                    </b>
+
+                </i>
+            </p>
+            <p>recevied by: <i><b>
+                        <%= chat.to %>
+                    </b>
+
+                </i>
+            </p>
+            <div class="msg">
+                <p></b>message: <b>
+                        <%= chat.message %>
+                    </b>
+                <form action="/chats/<%= chat._id %>/edit" method="get">
+                    <button>Edit</button>
+                </form>
+                <form action="/chats/<%= chat._id %>?_method=DELETE" method="post">
+                    <button>Delete</button>
+                </form>
+                </p>
+            </div>
+            <hr>
+            <p>
+                <%= chat.created_at.toString().split(" ")[4] %>
+            </p>
+            <p>
+                <%= chat.created_at.toString().split(" ").slice(0,4).join(" -") %>
+            </p>
+        </div>
+        <br>
+        <br>
+        <% } %>
+</body>
+
+</html>
